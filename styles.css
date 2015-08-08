@@ -1,0 +1,28 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	background-color: #000;
+	color: #fff;
+	font-family: 'VT323', 'Courier', 'Courier New', 'Monospaced';
+
+	animation-name: flicker;
+	animation-duration: 1;
+	animation-iteration-count: infinite;
+}
+
+div {
+	outline: none;
+}
+
+@keyframes flicker {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: .3;
+	}
+}
