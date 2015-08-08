@@ -11,4 +11,4 @@ var terminalFocus = function(){
     $('#input').focus();
 };
 
-$.click(terminalFocus);
+$(document).click(terminalFocus);
