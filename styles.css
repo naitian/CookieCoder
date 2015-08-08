@@ -2,6 +2,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 
+	overflow-x: hidden;
 	background-color: #000;
 }
 
@@ -15,15 +16,15 @@ html, body {
 
 }
 
-#below, #overlay {
+#overlay {
 	width: 100%;
 	height: 100%;
 
-	position: absolute;
-}
+	margin: 0;
+	top: 0;
+	left: 0;
 
-#overlay {
-
+	position: fixed;
 }
 
 #input {
