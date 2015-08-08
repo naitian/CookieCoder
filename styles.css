@@ -13,6 +13,9 @@ html, body {
 	background-color: #000;
 	color: #fff;
 	font-family: 'VT323', 'Courier', 'Courier New', 'Monospaced';
+	font-size: 14pt;
+
+	z-index: 0;
 
 }
 
@@ -24,9 +27,10 @@ html, body {
 	top: 0;
 	left: 0;
 
+	z-index: 10;
 	position: fixed;
 
-	background-image: repeating-linear-gradient(180deg, rgba());
+	background-image: repeating-linear-gradient(180deg, rgba(255, 255, 255, .25) 0px, rgba(255, 255, 255, .25) 1px, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0) 3px);
 }
 
 #input-pointer {
@@ -48,4 +52,8 @@ html, body {
 	width: 100%;
 
 	margin-bottom: 0px;
+}
+
+@keyframe flicker {
+	
 }
