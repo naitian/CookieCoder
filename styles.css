@@ -25,10 +25,19 @@ html, body {
 	left: 0;
 
 	position: fixed;
+
+	background-image: repeating-linear-gradient(180deg, rgba());
+}
+
+#input-pointer {
+	margin-left: 20px;
 }
 
 #input {
 	margin-top: 0px;
+	margin-left: 0px;
+	outline: none;
+	display: inline;
 }
 
 .content {
@@ -39,8 +48,4 @@ html, body {
 	width: 100%;
 
 	margin-bottom: 0px;
-}
-
-div {
-	outline: none;
 }
