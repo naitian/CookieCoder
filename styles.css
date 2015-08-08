@@ -30,11 +30,16 @@ html, body {
 	z-index: 10;
 	position: fixed;
 
-	background-image: repeating-linear-gradient(180deg, rgba(128, 128, 128, .4) 0px, rgba(128, 128, 128, .4) 1px, rgba(128, 128, 128, 0) 1px, rgba(128, 128, 128, 0) 3px);
+	background-image: -webkit-repeating-linear-gradient(top, rgba(128, 128, 128, .4) 0px, rgba(128, 128, 128, .4) 1px, rgba(128, 128, 128, 0) 1px, rgba(128, 128, 128, 0) 3px);
+	background-image: -moz-repeating-linear-gradient(top, rgba(128, 128, 128, .4) 0px, rgba(128, 128, 128, .4) 1px, rgba(128, 128, 128, 0) 1px, rgba(128, 128, 128, 0) 3px);
 
-	animation-name: flicker;
-	animation-duration: .15s;
-	animation-iteration-count: infinite;
+	-webkit-animation-name: flicker;
+	-webkit-animation-duration: .15s;
+	-webkit-animation-iteration-count: infinite;
+
+	-moz-animation-name: flicker;
+	-moz-animation-duration: .15s;
+	-moz-animation-iteration-count: infinite;
 }
 
 #input-pointer {
@@ -59,6 +64,30 @@ html, body {
 }
 
 @keyframes flicker {
+	0% { opacity: 0.6834431119496003;}
+	5% { opacity: 0.5434848030563444;}
+	10% { opacity: 0.9934175896923989;}
+	15% { opacity: 0.799422601936385;}
+	20% { opacity: 0.598800883628428;}
+	25% { opacity: 0.9582604031311348;}
+	30% { opacity: 0.9474515748443082;}
+	35% { opacity: 0.6266843342455104;}
+	40% { opacity: 0.6358606255380437;}
+	45% { opacity: 0.5298681787680835;}
+	50% { opacity: 0.939325507497415;}
+	55% { opacity: 0.5095674816984683;}
+	60% { opacity: 0.6185823050327599;}
+	65% { opacity: 0.9288128225598484;}
+	70% { opacity: 0.9790785731747746;}
+	75% { opacity: 0.7964195852400735;}
+	80% { opacity: 0.5345713298302144;}
+	85% { opacity: 0.8567775706760585;}
+	90% { opacity: 0.6334889306453988;}
+	95% { opacity: 0.8126309581566602;}
+	100% { opacity: 0.7502084154402837;}
+}
+
+@-webkit-keyframes flicker {
 	0% { opacity: 0.6834431119496003;}
 	5% { opacity: 0.5434848030563444;}
 	10% { opacity: 0.9934175896923989;}
