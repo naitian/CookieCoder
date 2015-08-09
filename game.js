@@ -44,7 +44,10 @@ var errors = ["error: You dun messed up A-aron.",
               "error: Your syntax is like Avatar: The Last Airbender Movie. You thought it would work.",
               "error: Your syntax is like this project. We thought it would work, too.",
               "error: You need help. No actually, help.",
-              "error: You just healthcare.gov'd."]
+              "error: You just healthcare.gov'd.",
+              "error: \"No Child Behind\" A+ for effort.",
+              "error: ...About as good as my German accent.",             
+             ]
 var CPS = 0;
 var historyCode = ['']
 var ptInHistory = 0;
@@ -63,7 +66,7 @@ $(document).keydown(function(ev){
                     if(parts[2] !== ''){
                         if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
                             addCookie(parts[2]);
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cookies'));
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
 
                             $('#input').html('');
                         } else {
