@@ -5,6 +5,7 @@ $(document).keydown(function(ev){
         if($('#input').html() !== ''){
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
+            console.log(parts);
             if(parts[0] === 'cookie'){
                 if(parts[1] === 'add'){
                     if(parts[2] !== ''){
@@ -75,7 +76,12 @@ function addCookie(name){
 
 function getParts(code){
     var command = code.substring(0, code.indexOf(' '));
-    var modifier = code.substring(code.indexOf('-') + 1, Math.max(code.lastIndexOf(' '), code.length));
+    var modifier = '';
+    if(code.indexOf(' ') === code.lastIndexOf(' ')){
+        modifier = code.substring(code.indexOf('-') + 1, code.length);
+    } else {
+        modifier = code.substring(code.indexOf('-') + 1, code.lastIndexOf(' '));
+    }
     if(code.indexOf(' ', code.indexOf('-')) !== -1){
         var argument = code.substring(code.lastIndexOf(' ') + 1);
         return [command.toLowerCase(), modifier.toLowerCase(), argument.toLowerCase()];
