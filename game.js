@@ -1,7 +1,7 @@
 var storeOpen = false;  
-var names = ['Item 1', 'Item 2', 'Item 3'];
-var prices = [1, 2, 3];
-var cps = [0.1, 0.2, 0.3];
+var names = ['Item 1', 'Naitian', 'Item 3', 'David'];
+var prices = [1, 2, 3, 4];
+var cps = [0.1, 0.2, 0.3, .4];
 var description = ['desc1', 'desc2', 'desc3'];
 
 $(document).keydown(function(ev){
@@ -58,46 +58,66 @@ $(document).keydown(function(ev){
                         if(storeOpen){
                             var c = getCookies();
                             console.log(parts[2]);
-                            switch(parts[2]){
-                                case names[0].toLowerCase():
-                                    if(prices[0] <= c){
-                                        subtractCookie(prices[0]);
-                                        addCPS(cps[0]);
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[0] + ' has been purchased.');
-                                        $('#input').html('');
-                                    } else {
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                                        $('#input').html('');
-                                    }
-                                    break;
-                                case names[1].toLowerCase():
-                                    if(prices[1] <= c){
-                                        subtractCookie(prices[1]);
-                                        addCPS(cps[1]);
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[1] + ' has been purchased.');
-                                        $('#input').html('');
-                                    } else {
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                                        $('#input').html('');
-                                    }
-                                    break;
-                                case names[2].toLowerCase():
-                                    if(prices[2] <= c){
-                                        subtractCookie(prices[2]);
-                                        addCPS(cps[2]);
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[2] + ' has been purchased.');
-                                        $('#input').html('');
-                                    } else {
-                                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                                        $('#input').html('');
-                                    }
-                                    break;
-                                default:
-                                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
-                                    $('#input').html('');
-                                    break;
-                                    
+                            var buy = false;
+                            for(var i = 0; i < names.length; i++){
+                            	if(names[i].toLowerCase() == parts[2]){
+                        			buy = true;
+                            		if(prices[i] <= c){
+                            			subtractCookie(prices[i]);
+                            			addCPS(cps[i])
+                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[i] + ' has been purchased.');
+                        				$('#input').html('');
+                            		}
+                            		else {
+                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
+                            			$('#input').html('');
+                            		}
+                            	}
                             }
+                            if(!buy){
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
+	                            $('#input').html('');
+                            }
+                            // switch(parts[2]){
+                            //     case names[0].toLowerCase():
+                            //         if(prices[0] <= c){
+                            //             subtractCookie(prices[0]);
+                            //             addCPS(cps[0]);
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[0] + ' has been purchased.');
+                            //             $('#input').html('');
+                            //         } else {
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
+                            //             $('#input').html('');
+                            //         }
+                            //         break;
+                            //     case names[1].toLowerCase():
+                            //         if(prices[1] <= c){
+                            //             subtractCookie(prices[1]);
+                            //             addCPS(cps[1]);
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[1] + ' has been purchased.');
+                            //             $('#input').html('');
+                            //         } else {
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
+                            //             $('#input').html('');
+                            //         }
+                            //         break;
+                            //     case names[2].toLowerCase():
+                            //         if(prices[2] <= c){
+                            //             subtractCookie(prices[2]);
+                            //             addCPS(cps[2]);
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[2] + ' has been purchased.');
+                            //             $('#input').html('');
+                            //         } else {
+                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
+                            //             $('#input').html('');
+                            //         }
+                            //         break;
+                            //     default:
+                            //         $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
+                            //         $('#input').html('');
+                            //         break;
+                                    
+                            // }
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You have to go into the store first.');
                             $('#input').html('');
