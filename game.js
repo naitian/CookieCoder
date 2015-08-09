@@ -46,12 +46,15 @@ var errors = ["error: You dun messed up A-aron.",
               "error: You need help. No actually, help.",
               "error: You just healthcare.gov'd."]
 var CPS = 0;
-var history = ['up arrow\'s fun, huh?'];
+var historyCode = ['']
 var ptInHistory = 0;
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
+            historyCode.reverse();
+            historyCode.push($('#input').html());
+            historyCode.reverse();
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
             console.log(parts[0]);
@@ -61,29 +64,29 @@ $(document).keydown(function(ev){
                         if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
                             addCookie(parts[2]);
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cookies'));
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Sorry, bud, no two cookies can be alike.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }
                     } else {
                         $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Add nothing, huh? You REALLY want to break this huh. >:(');
-                        history.push($('#input').html());
+                        
                         $('#input').html('');
                     }
                 } else if(parts[1] === 'view'){
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
-                    history.push($('#input').html());
+                    
                     $('#input').html('');
                 } else if(parts[1] === 'cps'){
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cps'));
-                    history.push($('#input').html());
+                    
                     $('#input').html('');
                 } else {
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> My cookie does not understand.');
-                    history.push($('#input').html());
+                    
                     $('#input').html('');
                 }
             } else if(parts[0] === 'store'){
@@ -91,11 +94,11 @@ $(document).keydown(function(ev){
                     case 'open':
                         if(!storeOpen){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Store is open. Welcome to Mick and Border.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }  else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Please stop opening the door.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }
                         printStoreItems();
@@ -104,11 +107,11 @@ $(document).keydown(function(ev){
                     case 'close':
                         if(storeOpen){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Bye-bye.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }  else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> It\'s a pull door.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }
                         storeOpen = false;
@@ -124,24 +127,24 @@ $(document).keydown(function(ev){
                             			subtractCookie(prices[i]);
                             			addCPS(cps[i])
                             			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + names[i] + ' has been purchased.');
-                        				history.push($('#input').html()); 
+                        				 
                                         $('#input').html('');
                             		}
                             		else {
                             			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You don\'t have enough cookies. Sorry, bruh!');
-                            			history.push($('#input').html());
+                            			
                                         $('#input').html('');
                             		}
                             	}
                             }
                             if(!buy){
 	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Out of stock.');
-	                            history.push($('#input').html());                    
+	                    
                                 $('#input').html('');
                             }
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You have to go into the store first.');
-                            history.push($('#input').html());
+
                             $('#input').html('');
                         }
                         break;
@@ -160,10 +163,20 @@ $(document).keydown(function(ev){
                 reset(code);
             }
         }
-    } else if(ev.keyCode == 38){ //up arrow
-        
-    } else if(ev.keyCode == 40){ //down arrow
-        
+    } else if(ev.keyCode == 38){
+        $('#input').html(historyCode[ptInHistory]);
+        ptInHistory += 1;
+        if(ptInHistory == historyCode.length){
+            ptInHistory = historyCode.length - 1;   
+        }
+    } else if(ev.keyCode == 40){ //up arrow
+        $('#input').html(historyCode[ptInHistory]);
+        ptInHistory -= 1;
+        if(ptInHistory < 0){
+            ptInHistory = 0;   
+        }
+    } else {
+        historyCode[historyCode.length - 1] = $('#input').html();
     }
 });
 
@@ -175,8 +188,7 @@ function printStoreItems(){
 }
 
 function reset(code){
-    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + errors[Math.floor(Math.random() * errors.length)]);
-    history.push($('#input').html());                         
+    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + errors[Math.floor(Math.random() * errors.length)]);    
     $('#input').html('');
 }
 
