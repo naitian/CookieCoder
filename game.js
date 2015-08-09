@@ -2,8 +2,14 @@ var javaTemplate = 'Cookie ~=new Cookie();';
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
-        if($('#input').html() !== ''){]
-            htmlToAppend = getHTML($('#input').html());
+        if($('#input').html() !== ''){
+            if($('#input').html().indexOf('store') === 0){
+                
+            } else if($('#input').html().indexOf('cookie') === 0){
+                
+            } else {
+                
+            }
             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: cannot find symbol');
             $('#input').html('');
         }
@@ -11,62 +17,8 @@ $(document).keydown(function(ev){
 });
 
 function getHTML(code){
-    if(isJava(code)){
-        return 'java html';   
-    } else if(isCsharp(code)){
-        return 'c# html';   
-    } else {
-        return 'error';   
-    }
+    
 }
-
-
-function isJava(code){
-    return true;
-}
-
-function isCsharp(code){
-    return true;
-}
-
-
-function checkJava(code){
-    var code = $('#input').html();
-    code = code.replace(' =','=').replace('= ','=');
-    //check if varName is possible
-    var varName = code.substring(javaTemplate.indexOf('~'), code.indexOf(javaTemplate[javaTemplate.indexOf('~') + 1]));
-    if(!varName){
-        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: cannot find symbol');
-        $('#input').html('');
-        return false;
-    }
-    if(!varName[0].match(/[A-Za-z$_]/)){
-        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: not a statement');
-        $('#input').html('');
-        return;
-    }
-    //Check if varName has already been used
-    var pastVariableNames = JSON.parse(localStorage.getItem('variableNames'));
-    if($.inArray(varName, pastVariableNames) !== -1){
-        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: variable name already used');
-        $('#input').html('');
-        return;
-    }
-
-    //Store variable name
-    pastVariableNames.push(varName);
-    localStorage.setItem('variableNames', JSON.stringify(pastVariableNames));
-
-    var correctCode = javaTemplate.replace('~', varName);
-    if(correctCode != code){
-        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: \';\' expected');
-        $('#input').html('');
-        return;
-    }
-    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html());
-    $('#input').html('');
-}
-
 
 var terminalFocus = function(){
     $('#input').focus();
