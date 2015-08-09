@@ -1,3 +1,5 @@
+var storeOpen = true;
+
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
@@ -18,7 +20,25 @@ $(document).keydown(function(ev){
                     $('#input').html('');
                 }
             } else if(parts[0] === 'store'){
-                
+                if(parts[1] === 'open'){
+                    if(!storeOpen){
+                        $('#screen').html($('#screen').html() + '<br>$ Store is open. Welcome to Mick and Border.');
+                        $('#input').html('');
+                    }  else {
+                        $('#screen').html($('#screen').html() + '<br>$ Please stop opening the door.');
+                        $('#input').html('');
+                    }
+                    storeOpen = true;
+                } else if(parts[1] === 'close'){
+                    if(storeOpen){
+                        $('#screen').html($('#screen').html() + '<br>$ Bye-bye. .');
+                        $('#input').html('');
+                    }  else {
+                        $('#screen').html($('#screen').html() + '<br>$ Please stop opening the door.');
+                        $('#input').html('');
+                    }
+                    storeOpen = false;
+                }
             } else {
                 
             }
