@@ -40,13 +40,14 @@ var description = ['What more could you ask for?',
 				   'Gee, talk about <i>hyper</i>text markup language',
 				   '"It\'s stupidity. It\'s worse than stupidity: it\'s cookie clicker without any clicking."',
 				   'Hell yeah'];
-var errors = ["You dun messed up A-aron.",
-              "Your syntax is like Avatar: The Last Airbender Movie. You thought it would work.",
-              "Your syntax is like this project. We thought it would work, too.",
-              "You need help. No actually, help.",
-              "You just healthcare.gov'd."]
+var errors = ["error: You dun messed up A-aron.",
+              "error: Your syntax is like Avatar: The Last Airbender Movie. You thought it would work.",
+              "error: Your syntax is like this project. We thought it would work, too.",
+              "error: You need help. No actually, help.",
+              "error: You just healthcare.gov'd."]
 var CPS = 0;
-
+var history = ['up arrow\'s fun, huh?'];
+var ptInHistory = 0;
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
@@ -59,23 +60,29 @@ $(document).keydown(function(ev){
                         if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
                             addCookie(parts[2]);
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cookies'));
+                            history.push($('#input').html());
                             $('#input').html('');
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Sorry, bud, no two cookies can be alike.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }
                     } else {
                         $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Add nothing, huh? You REALLY want to break this huh. >:(');
+                        history.push($('#input').html());
                         $('#input').html('');
                     }
                 } else if(parts[1] === 'view'){
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
+                    history.push($('#input').html());
                     $('#input').html('');
                 } else if(parts[1] === 'cps'){
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cps'));
+                    history.push($('#input').html());
                     $('#input').html('');
                 } else {
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> My cookie does not understand.');
+                    history.push($('#input').html());
                     $('#input').html('');
                 }
             } else if(parts[0] === 'store'){
@@ -83,9 +90,11 @@ $(document).keydown(function(ev){
                     case 'open':
                         if(!storeOpen){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Store is open. Welcome to Mick and Border.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }  else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Please stop opening the door.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }
                         printStoreItems();
@@ -94,9 +103,11 @@ $(document).keydown(function(ev){
                     case 'close':
                         if(storeOpen){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Bye-bye.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }  else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> It\'s a pull door.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }
                         storeOpen = false;
@@ -112,20 +123,24 @@ $(document).keydown(function(ev){
                             			subtractCookie(prices[i]);
                             			addCPS(cps[i])
                             			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + names[i] + ' has been purchased.');
-                        				$('#input').html('');
+                        				history.push($('#input').html()); 
+                                        $('#input').html('');
                             		}
                             		else {
                             			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You don\'t have enough cookies. Sorry, bruh!');
-                            			$('#input').html('');
+                            			history.push($('#input').html());
+                                        $('#input').html('');
                             		}
                             	}
                             }
                             if(!buy){
 	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Out of stock.');
-	                            $('#input').html('');
+	                            history.push($('#input').html());                    
+                                $('#input').html('');
                             }
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You have to go into the store first.');
+                            history.push($('#input').html());
                             $('#input').html('');
                         }
                         break;
@@ -137,6 +152,10 @@ $(document).keydown(function(ev){
                 reset(code);
             }
         }
+    } else if(ev.keyCode == 38){ //up arrow
+        
+    } else if(ev.keyCode == 40){ //down arrow
+        
     }
 });
 
@@ -149,6 +168,7 @@ function printStoreItems(){
 
 function reset(code){
     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + errors[Math.floor(Math.random() * errors.length)]);
+    history.push($('#input').html());                         
     $('#input').html('');
 }
 
