@@ -8,18 +8,18 @@ $(document).keydown(function(ev){
 			//check if varName is possible
 			var varName = code.substring(javaTemplate.indexOf('~'), code.indexOf(javaTemplate[javaTemplate.indexOf('~') + 1]));
 			if(!varName){
-				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'Syntax Error');
+				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: cannot find symbol');
 				$('#input').html('');
 				return;
 			}
 			if(!varName[0].match(/[A-Za-z$_]/)){
-				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'Variable name invalid');
+				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: not a statement');
 				$('#input').html('');
 				return;
 			}
 			var correctCode = javaTemplate.replace('~', varName);
 			if(correctCode != code){
-				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'Syntax Error');
+				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: \';\' expected');
 				$('#input').html('');
 				return;
 			}
