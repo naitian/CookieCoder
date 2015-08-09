@@ -31,7 +31,7 @@ function addCookie(name){
     var variableNames = JSON.parse(localStorage.getItem('variableNames'));
     variableNames.push(name);
     localStorage.setItem('variableNames', JSON.stringify(variableNames));
-    var cookies = JSON.parse(localStorage.getItem('cookies'));
+    var cookies = localStorage.getItem('cookies');
     cookies += 1;
     localStorage.setItem('cookies', cookies);
 }
@@ -55,10 +55,10 @@ $(document).click(terminalFocus);
 
 $(document).ready(function(){
     if(!localStorage.getItem('cookies')){
-        localStorage.setItem('cookies',JSON.stringify([]));   
+        localStorage.setItem('cookies',0);   
     }
     if(!localStorage.getItem('cps')){
-        localStorage.setItem('cps',JSON.stringify([]));   
+        localStorage.setItem('cps',0);   
     }
     if(!localStorage.getItem('variableNames')){
         localStorage.setItem('variableNames',JSON.stringify([]));   
