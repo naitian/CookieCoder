@@ -1,7 +1,34 @@
 var storeOpen = false;  
-var names = ['Item 1', 'Naitian', 'Item 3', 'David'];
-var prices = [1, 2, 3, 4];
-var cps = [0.1, 0.2, 0.3, .4];
+var names = ['Notepad', 
+			 'More Goats (and RAM)',
+			 'Chrome Dev Tools',
+			 'Git Up and Dance',
+			 'Tux',
+			 'Quicksort',
+			 'JQuery',
+			 'Caffeine',
+			 'Richard Stallman',
+			 'Stack Overflow'];
+var prices = [2,
+			  64,
+			  512,
+			  2048,
+			  131072,
+			  1048576,
+			  134217728,
+			  1073741824,
+			  17179869184,
+			  1099511627776];
+var cps = [.125,
+		   4,
+		   16,
+		   64,
+		   256,
+		   4096,
+		   1048576,
+		   67108864,
+		   268435456,
+		   127438953472];
 var description = ['desc1', 'desc2', 'desc3'];
 
 $(document).keydown(function(ev){
