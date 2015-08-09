@@ -42,34 +42,34 @@ $(document).keydown(function(ev){
                     if(parts[2] !== ''){
                         if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
                             addCookie(parts[2]);
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + localStorage.getItem('cookies'));
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cookies'));
                             $('#input').html('');
                         } else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Sorry, bud, no two cookies can be alike.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Sorry, bud, no two cookies can be alike.');
                             $('#input').html('');
                         }
                     } else {
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Add nothing, huh? You REALLY want to break this huh. >:(');
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Add nothing, huh? You REALLY want to break this huh. >:(');
                         $('#input').html('');
                     }
                 } else if(parts[1] === 'view'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
+                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
                     $('#input').html('');
                 } else if(parts[1] === 'cps'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + localStorage.getItem('cps'));
+                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cps'));
                     $('#input').html('');
                 } else {
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ My cookie does not understand.');
+                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> My cookie does not understand.');
                     $('#input').html('');
                 }
             } else if(parts[0] === 'store'){
                 switch(parts[1]){ //switch case for modifier
                     case 'open':
                         if(!storeOpen){
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Store is open. Welcome to Mick and Border.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Store is open. Welcome to Mick and Border.');
                             $('#input').html('');
                         }  else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Please stop opening the door.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Please stop opening the door.');
                             $('#input').html('');
                         }
                         printStoreItems();
@@ -77,10 +77,10 @@ $(document).keydown(function(ev){
                         break;
                     case 'close':
                         if(storeOpen){
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Bye-bye.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Bye-bye.');
                             $('#input').html('');
                         }  else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ It\'s a pull door.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> It\'s a pull door.');
                             $('#input').html('');
                         }
                         storeOpen = false;
@@ -96,21 +96,21 @@ $(document).keydown(function(ev){
                             		if(prices[i] <= c){
                             			subtractCookie(prices[i]);
                             			addCPS(cps[i])
-                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[i] + ' has been purchased.');
+                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + names[i] + ' has been purchased.');
                         				$('#input').html('');
                             		}
                             		else {
-                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
+                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You don\'t have enough cookies. Sorry, bruh!');
                             			$('#input').html('');
                             		}
                             	}
                             }
                             if(!buy){
-	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Out of stock.');
 	                            $('#input').html('');
                             }
                         } else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You have to go into the store first.');
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You have to go into the store first.');
                             $('#input').html('');
                         }
                         break;
@@ -128,12 +128,12 @@ $(document).keydown(function(ev){
 function printStoreItems(){
     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html());
     for(var cnt = 0; cnt < names.length; cnt++){
-        $('#screen').html($('#screen').html() + '<br>$ ' + names[cnt] + '<br>$ ' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
+        $('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">' + names[cnt] + '</span><br> - ' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
     }
 }
 
 function reset(code){
-    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You dun messed up A-aron.');
+    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You dun messed up A-aron.');
     $('#input').html('');
 }
 
@@ -190,7 +190,7 @@ $(document).click(terminalFocus);
 
 $(document).ready(function(){
     if(!localStorage.getItem('cookies')){
-        localStorage.setItem('cookies',JSON.stringify(0));   
+        localStorage.setItem('cookies',JSON.stringify(0));
     }
     if(!localStorage.getItem('cps')){
         localStorage.setItem('cps',JSON.stringify(0));   
