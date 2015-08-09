@@ -1,5 +1,3 @@
-var javaTemplate = 'Cookie ~=new Cookie();';
-
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
@@ -15,10 +13,6 @@ $(document).keydown(function(ev){
         }
     }
 });
-
-function getHTML(code){
-    
-}
 
 var terminalFocus = function(){
     $('#input').focus();
