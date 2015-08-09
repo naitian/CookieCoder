@@ -153,12 +153,16 @@ $(document).keydown(function(ev){
                         break;
                 }
             } else if(parts[0] === 'help') {
-    			$('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
+            	$('#input').html('');
+    			$('#screen').html($('#screen').html() + '<br>$ help<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
     													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
     													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
     													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
     													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close');
     			$('#input').html('');
+        	} else if(parts[0] === 'clear') {
+        		$('#input').html('');
+    			$('#screen').html('');
         	} else {
                 reset(code);
             }
