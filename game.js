@@ -1,18 +1,51 @@
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
-            if($('#input').html().indexOf('store') === 0){
-                
-            } else if($('#input').html().indexOf('cookie') === 0){
+            code = $('#input').html();
+            var parts = getParts(code); //parts is like command -modifier arguments
+            if(parts[0] === 'cookie'){
+                if(parts[1] === 'add'){
+                    if(parts[2] !== ''){
+                        addCookie(parts[2]);
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + localStorage.getItem('cookies'));
+                        $('#input').html('');
+                    }
+                } else if(parts[1] === 'view'){
+                    $('#screen').html($('#screen').html() + '<br>$ ' + localStorage.getItem('cookies'));
+                    $('#input').html('');
+                } else if(parts[1] === 'cps'){
+                    $('#screen').html($('#screen').html() + '<br>$ ' + localStorage.getItem('cps'));
+                    $('#input').html('');
+                }
+            } else if(parts[0] === 'store'){
                 
             } else {
                 
             }
-            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: cannot find symbol');
-            $('#input').html('');
         }
     }
 });
+
+
+function addCookie(name){
+    var variableNames = JSON.parse(localStorage.getItem('variableNames'));
+    variableNames.push(name);
+    localStorage.setItem('variableNames', JSON.stringify(variableNames));
+    var cookies = JSON.parse(localStorage.getItem('cookies'));
+    cookies += 1;
+    localStorage.setItem('cookies', cookies);
+}
+
+
+function getParts(code){
+    var command = code.substring(0, code.indexOf(' '));
+    var modifier = code.substring(code.indexOf('-') + 1, code.lastIndexOf(' '));
+    if(code.indexOf(' ', code.indexOf('-')) !== -1){
+        var argument = code.substring(code.lastIndexOf(' ') + 1);
+        return [command.toLowerCase(), modifier.toLowerCase(), argument.toLowerCase()];
+    }
+    return [command.toLowerCase(), modifier.toLowerCase(),''];
+}
 
 var terminalFocus = function(){
     $('#input').focus();
@@ -21,6 +54,12 @@ var terminalFocus = function(){
 $(document).click(terminalFocus);
 
 $(document).ready(function(){
+    if(!localStorage.getItem('cookies')){
+        localStorage.setItem('cookies',JSON.stringify([]));   
+    }
+    if(!localStorage.getItem('cps')){
+        localStorage.setItem('cps',JSON.stringify([]));   
+    }
     if(!localStorage.getItem('variableNames')){
         localStorage.setItem('variableNames',JSON.stringify([]));   
     }
