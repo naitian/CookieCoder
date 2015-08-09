@@ -30,13 +30,13 @@ var cps = [.125,
 		   268435456,
 		   127438953472];
 var description = ['desc1', 'desc2', 'desc3'];
+var CPS = 0;
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
-            console.log(parts);
             if(parts[0] === 'cookie'){
                 if(parts[1] === 'add'){
                     if(parts[2] !== ''){
@@ -88,7 +88,6 @@ $(document).keydown(function(ev){
                     case 'buy':
                         if(storeOpen){
                             var c = getCookies();
-                            console.log(parts[2]);
                             var buy = false;
                             for(var i = 0; i < names.length; i++){
                             	if(names[i].toLowerCase() == parts[2]){
@@ -148,6 +147,13 @@ function addCookie(name){
 }
 
 
+function addCookies(amount){
+    var cookies = JSON.parse(localStorage.getItem('cookies'));
+    cookies += amount;
+    localStorage.setItem('cookies', JSON.stringify(cookies));
+}
+
+
 function subtractCookie(num){
     var cookies = JSON.parse(localStorage.getItem('cookies'));
     cookies -= num;
@@ -163,6 +169,7 @@ function getCookies(){
 function addCPS(add){
     var cps = JSON.parse(localStorage.getItem('cps'));
     cps += add;
+    CPS = cps;
     localStorage.setItem('cps', JSON.stringify(cps));
 }
     
@@ -193,9 +200,13 @@ $(document).ready(function(){
         localStorage.setItem('cookies',JSON.stringify(0));
     }
     if(!localStorage.getItem('cps')){
-        localStorage.setItem('cps',JSON.stringify(0));   
+        localStorage.setItem('cps',JSON.stringify(0));
     }
     if(!localStorage.getItem('variableNames')){
         localStorage.setItem('variableNames',JSON.stringify([]));   
     }
+    CPS = JSON.parse(localStorage.getItem('cps'));
+    setInterval(function() {
+        addCookies(CPS);
+    }, 3000);
 });
