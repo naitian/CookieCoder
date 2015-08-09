@@ -17,8 +17,20 @@ $(document).keydown(function(ev){
 				$('#input').html('');
 				return;
 			}
+            //Check if varName has already been used
+            pastVariableNames = JSON.parse(localStorage.getItem('variableNames'));
+            if($.inArray(varName, pastVariableNames) !== -1){
+				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: variable name already used');
+				$('#input').html('');
+				return;
+            }
+            
+            //Store variable name
+            pastVariableNames.push(varName);
+            localStorage.setItem('variableNames', JSON.stringify(pastVariableNames));
+            
 			var correctCode = javaTemplate.replace('~', varName);
-			if(correctCode != code){
+            if(correctCode != code){
 				$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + 'error: \';\' expected');
 				$('#input').html('');
 				return;
@@ -34,3 +46,9 @@ var terminalFocus = function(){
 };
 
 $(document).click(terminalFocus);
+
+$(document).ready(function(){
+    if(!localStorage.getItem('variableNames')){
+        localStorage.setItem('variableNames',JSON.stringify([]));   
+    }
+});
