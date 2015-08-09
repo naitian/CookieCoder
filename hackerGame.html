@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HackIn</title>
+<script type="text/javascript">
+var monitor;
+var input;
+var commands;
+var fileArray;
+var password;
+var doc;
+var time;
+var global_i;
+var global_j;
+var level;
+var password2;
+function init(){
+	monitor = document.getElementById('console');
+	input = document.getElementById('input');
+	commands = ['access()', 'help()', 'keygen()', 'decoy()', 'jamNet()', 'freezeOps()', 'exit()', 'del()'];
+	fileArray = ['nonex_corp', 'training', 'welcome_message', 'LOG_Agent_0521', 'nonex_welcome', 'project_hackin', 'project_maelstrom', 'whitehouse', 'cia', 'fukushima', 'f-22', 'ws_crash', 'mi6', 'digital_fortress', 'project_langdon'];
+	doc = ['CONFIDENTIAL: Nonex Corporation - HackInfinity partnership. Nonex Corp. officials say HackInfinity will provide the software that will "complement our hardware to create many a great products to come"...', 'delete this document by entering the del() command.', 'Welcome to HackIn. You have been selected from thousands of high-level programmers to be a part of this program. Type "TARDIS" in all lower case to begin your training.', '-73.170975,68.474414: They have me trapped here and they will not let me go. Help! HackIn is not all that it seems. Do not trust anyone. Run or die. THEY ARE HERE! aldjjjjjjsfkffffffffffjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 'Welcome to Nonex Corporation, where we try to help you live a better life in a better world. Our expertise extends everywhere, from culinary arts to automobiles to top secret defense projects. We know what you need, and we are here to help. To contact us, dial 555-666-3926.', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...', 'Secure information. Password required...','','Project HackInfinity: Expertise in hacking by hiring only the best through a series of grueling tests. Must maintain total secrecy. The project must be maintained seperate from the Corporation. Hacking will be used to exploit government and rival plans and resources. Hackers will be in the dark about this.', 'Project Maelstrom: FAILED. A satellite system designed to be able to track any person in the world. 52 people killed, 184 injured, during the Incident.', 'White House documents: BLUEPRINT LOCATED AT http://www.whitehousemuseum.org/images/white-house-blue-print-1024.jpg. Asset for possible invasion.', 'CIA: file of inside agents for Nonex include Aldrich Ames and Katrina Leung.', 'Fukushima catastrophe: executed after the Japanese government refused to use Nonex coal and natural gas supplies. At least 39 casualties. Operation deemed SUCCESSFUL by the Head.', 'F-22 Raptor: sophisticated aircraft manufactured by Lockheed Martin, a branch of Nonex Corp. Agent #0521 of HackInfinity has been able to access the flight systems remotely, giving us complete control of the most crucial air force operations.', 'Wall Street crash: there are several of our agents positioned strategically in many of the most powerful businesses in Wall Street, although a "failure" of Nonex would be enough to cripple the United States.', 'MI6: has also been infiltrated by Nonex agents. There is currently a tight grasp on their operations.', 'Project Digital Fortress: Highly secure project. More information can be found here: http://www.danbrown.com/digital-fortress/', 'Project Langdon: FAILED. Possibly the greatest failure of all time in Nonex. All information was erased from files. Only the Head and a select few from the Board know exactly what happened.'];
+	begin();
+}
+function put(text){
+	monitor.value = monitor.value + '\n' + text;
+}
+window.onkeydown = function listen(e){
+	e = e || window.event;
+	keycode = e.which || e.keyCode;
+	if(keycode == 13){
+		put(input.value);
+		analyze(input.value)
+		input.value = "";
+		monitor.scrollTop = monitor.scrollHeight;
+	}
+}
+function clearBox(){
+	monitor.value = "";		
+}
+function begin(){
+	put('Welcome to HackIn. You have been selected from thousands of high-level programmers to be a part of this program. Type "TARDIS" in all lower case to begin your training.');
+	orientation();
+}
+function orientation(){
+	if(monitor.value.indexOf('tardis',160) == -1){
+		setTimeout(orientation, 100)	
+	}
+	else{
+		put('Let us begin...');
+		help();
+		put('initiating training stage');
+		window.setTimeout('training()', 15000);
+	}
+}
+function training(){
+	level = 1;
+	clearBox();
+	password = false;
+	put("your mission is to delete the 'training' file from our training directory. you have exactly 120 seconds to do it. your time is shown below your input box. begin now.");
+	put('enter passcode');
+	training2();
+	timer(120)
+}
+function training2(){
+	if(!password){
+		setTimeout(training2, 100);	
+	}
+	else{
+		clearBox()
+		for(i = 0; i <= 3; i++){
+			put(fileArray[i]);	
+		}
+	}
+}
+function analyze(command){
+	for(i = 0; i <= commands.length; i++){
+		if(commands[i] === command){
+			global_i = i;
+			run(commands[i]);
+			return;
+		}
+	}
+	if(global_i === 0)
+		for(j = 0; j <= fileArray.length; j++){
+			if(fileArray[j] === command){
+				access(j);
+				global_j = j;
+				return;
+		}
+	}
+	put('syntax error: invalid command')
+	time -= 5
+}
+function run(command){
+	switch(command){
+		case 'access()':
+			put('enter file name...');
+		break;
+		case 'help()':
+			help();
+		break;
+		case 'keygen()':
+			keygen()
+		break;
+		case 'decoy()':
+			addTime();
+		break;
+		case 'jamNet()':
+			addTime();
+		break;
+		case 'freezeOps':
+			addTime();
+		break;
+		case 'exit()':
+			exit()
+		break;
+		case 'del()':
+			del();
+		break;
+		default:
+			put('syntax error: invalid command')
+			//time -= 5;
+		break;
+	}
+}
+function access(file){
+	clearBox();
+	if(password){
+		put(doc[file])
+	}
+}
+function help(){
+	put('These are some of the commands you will be using during your missions:');
+	put('access() - access a file in the directory. you must type the file name after the prompt to do so.');
+	put('keygen() - generates the correct passkey for password entry');
+	put('decoy() - creates a decoy intruder so that the anti-virus software will have a harder time tracking you');
+	put('jamNet() - jams the network, gives you a bit more time to enter the system');
+	put('freezeOps() - freezes all hacking operation. you will have failed the mission, but you will be aborting undetected');
+	put('exit() - exits a file back into the main directory.');
+	put('del() - your most important tool. deletes files');
+	put('enter help() to access these commands');
+}
+function keygen(){
+	if(!password){
+		setTimeout("password = true; console.log(password);", 3000);
+	}
+	else if(!password2){
+		setTimeout("password2 = true; console.log('tacos are funny. lolz. if you are reading this, kudos to you.')", 5000);	
+	}
+}
+function decoy(){
+	time++;	
+}
+function timer(amount){
+	time = amount;
+	var tick = document.getElementById('timer');
+	tick.innerHTML = 'Time: ' + time;
+	time--;
+	if(doc[1] === ''){
+		trainingSuccess();
+		return;
+	}
+	if(fileArray[10] === ''){
+		missionSuccess();
+		return;
+	}
+	if(time <= 0){
+		failure();
+		return;
+	}
+	setTimeout('timer(time)', 1000)
+}
+function addTime(){
+	time += 5;	
+}
+function del(){
+	fileArray[global_j] = "";
+	doc[global_j] = "";
+	clearBox();
+	exit()
+}
+function exit(){
+	if(level === 1){
+		if(global_j === 0 || global_j === 3){
+			traitor();	
+			return;
+		}
+		for(i = 0; i <= 3; i++){
+			put(fileArray[i]);	
+		}	
+	}
+	if(level === 2){
+		clearBox();
+		for(i = 4; i < fileArray.length; i++){
+			put(fileArray[i]);	
+		}
+	}
+	password2 = false;
+}
+function trainingSuccess(){
+	clearBox();
+	put("Congratulations on a successful training operation. You are a very bright programmer. Now we must present you with a real mission. You must enter the Nonex Corporation's database and delete the entirety of the file about Agent 0521. We trust that you will get the job done. Your 100 seconds to do this begins now.");
+	level = 2;
+	setTimeout(trainingSuccess2, 6000);
+}
+function trainingSuccess2(){
+	doc[1] = ' ';
+	timer(100);
+	clearBox();
+	put('Welcome to Nonex Corporation. Please enter password.');
+	password = false;
+	password2 = false;
+	mission();	
+}
+function failure(){
+	clearBox();
+	put('you have failed your mission. it seems that we have chosen wrongly. you will be eliminated from the program immediately.');
+}
+function traitor(){
+	clearBox();
+	put('you know too much. you will be terminated immediately. we trusted you to do your duty and only your duty, but we obviously trusted the wrong person.')	
+}
+function mission(){
+	layerCheck();
+	if(!password){
+		setTimeout(mission, 100);	
+	}
+	else{
+		clearBox();
+		for(i = 4; i < fileArray.length; i++){
+			put(fileArray[i]);	
+		}
+	}
+}
+function layerCheck(){
+	if(global_j <= 14 && global_j >= 4){
+		//console.log('registered')
+		if(password2){
+			access(global_j + 11);
+		}
+	}
+	setTimeout(layerCheck, 100);
+}
+function missionSuccess(){
+	clearBox();
+	put('Great job on a mission well done. You may be a rookie now, but the administrative board sees potential in you. Hackin will be forever grateful for your accomplishment.');
+	setTimeout(clearBox, 5000)
+}
+</script>
+</head>
+
+<body style="background-color:#070707;" onLoad="init()">
+<textarea name="textarea" readonly="readonly" style="display:block; width:60%; background-color:#000; margin-left:auto; margin-right:auto; height:500px; resize:none; margin-top:20px; border:solid thin #EAEAEA; color:#ff0;" id="console"></textarea>
+<input type="text" autofocus="autofocus" style="display:block; width:60.1%; background-color:#000; margin-left:auto; margin-right:auto; color:#FF0; font-family:'Courier New', Courier, monospace;" id="input">
+<p style="color:#E9E9E9; text-align:center; font-family:'Courier New', Courier, monospace;" id="timer">Time:</p>
+</body>
+</html>
