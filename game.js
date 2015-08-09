@@ -9,7 +9,7 @@ var names = ['Notepad',
 			 'Caffeine',
 			 'Richard Stallman',
 			 'Stack Overflow'];
-var prices = [2,
+var prices = [8,
 			  64,
 			  512,
 			  2048,
@@ -29,7 +29,16 @@ var cps = [.125,
 		   67108864,
 		   268435456,
 		   127438953472];
-var description = ['desc1', 'desc2', 'desc3'];
+var description = ['What more could you ask for?',
+				   'Old McDonald(Knuth) had a farm...',
+				   'console.log(\'what a tool\')',
+				   'git commit -m "edm"',
+				   'rm -rf /',
+				   'So fast it makes up for Java',
+				   '#money',
+				   'Gee, talk about <i>hyper</i>text markup language',
+				   '"It\'s stupidity. It\'s worse than stupidity: it\'s cookie clicker without any clicking."',
+				   'Hell yeah'];
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
