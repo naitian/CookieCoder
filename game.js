@@ -48,6 +48,7 @@ $(document).keydown(function(ev){
         if($('#input').html() !== ''){
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
+            console.log(parts[0]);
             if(parts[0] === 'cookie'){
                 if(parts[1] === 'add'){
                     if(parts[2] !== ''){
@@ -128,7 +129,10 @@ $(document).keydown(function(ev){
                         reset(code);
                         break;
                 }
-            } else {
+            } else if(parts[0] === 'help') {
+    			$('#screen').html($('#screen').html() + '<span style="color: #349ADB">(git) checkout how many cookies you have:</span><br>cookie -view <br>');
+    			$('#input').html('');
+        	} else {
                 reset(code);
             }
         }
