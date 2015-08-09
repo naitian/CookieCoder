@@ -48,9 +48,12 @@ $(document).keydown(function(ev){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Sorry, bud, no two cookies can be alike.');
                             $('#input').html('');
                         }
+                    } else {
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Add nothing, huh? You REALLY want to break this huh. >:(');
+                        $('#input').html('');
                     }
                 } else if(parts[1] === 'view'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + localStorage.getItem('cookies'));
+                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
                     $('#input').html('');
                 } else if(parts[1] === 'cps'){
                     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + localStorage.getItem('cps'));
