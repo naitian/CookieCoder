@@ -11,21 +11,10 @@ $(document).keydown(function(ev){
 });
 
 function getHTML(code){
-    var language = checkLanguage(code);
-    if(language === 'java'){
-        return 'java html'; 
-    } else if(language === 'c#'){
-        return 'c# html';   
-    } else {
-        return 'SUCKS TO SUCK';   
-    }
-}
-
-function checkLanguage(code){
     if(isJava(code)){
-        return 'java';   
+        return 'java html';   
     } else if(isCsharp(code)){
-        return 'c#';   
+        return 'c# html';   
     } else {
         return 'error';   
     }
