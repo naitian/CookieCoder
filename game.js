@@ -45,6 +45,7 @@ $(document).keydown(function(ev){
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Please stop opening the door.');
                             $('#input').html('');
                         }
+                        printStoreItems();
                         storeOpen = true;
                         break;
                     case 'close':
@@ -81,46 +82,6 @@ $(document).keydown(function(ev){
 	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
 	                            $('#input').html('');
                             }
-                            // switch(parts[2]){
-                            //     case names[0].toLowerCase():
-                            //         if(prices[0] <= c){
-                            //             subtractCookie(prices[0]);
-                            //             addCPS(cps[0]);
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[0] + ' has been purchased.');
-                            //             $('#input').html('');
-                            //         } else {
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                            //             $('#input').html('');
-                            //         }
-                            //         break;
-                            //     case names[1].toLowerCase():
-                            //         if(prices[1] <= c){
-                            //             subtractCookie(prices[1]);
-                            //             addCPS(cps[1]);
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[1] + ' has been purchased.');
-                            //             $('#input').html('');
-                            //         } else {
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                            //             $('#input').html('');
-                            //         }
-                            //         break;
-                            //     case names[2].toLowerCase():
-                            //         if(prices[2] <= c){
-                            //             subtractCookie(prices[2]);
-                            //             addCPS(cps[2]);
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ ' + names[2] + ' has been purchased.');
-                            //             $('#input').html('');
-                            //         } else {
-                            //             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You don\'t have enough cookies. Sorry, bruh!');
-                            //             $('#input').html('');
-                            //         }
-                            //         break;
-                            //     default:
-                            //         $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Out of stock.');
-                            //         $('#input').html('');
-                            //         break;
-                                    
-                            // }
                         } else {
                             $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You have to go into the store first.');
                             $('#input').html('');
@@ -136,6 +97,13 @@ $(document).keydown(function(ev){
         }
     }
 });
+
+function printStoreItems(){
+    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html());
+    for(var cnt = 0; cnt < names.length; cnt++){
+        $('#screen').html($('#screen').html() + '<br>$ ' + names[cnt] + '<br>$ ' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
+    }
+}
 
 function reset(code){
     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ You dun messed up A-aron.');
