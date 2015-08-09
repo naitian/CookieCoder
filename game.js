@@ -1,4 +1,4 @@
-var storeOpen = true;
+var storeOpen = false;  
 
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
@@ -22,29 +22,36 @@ $(document).keydown(function(ev){
             } else if(parts[0] === 'store'){
                 if(parts[1] === 'open'){
                     if(!storeOpen){
-                        $('#screen').html($('#screen').html() + '<br>$ Store is open. Welcome to Mick and Border.');
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Store is open. Welcome to Mick and Border.');
                         $('#input').html('');
                     }  else {
-                        $('#screen').html($('#screen').html() + '<br>$ Please stop opening the door.');
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Please stop opening the door.');
                         $('#input').html('');
                     }
                     storeOpen = true;
                 } else if(parts[1] === 'close'){
                     if(storeOpen){
-                        $('#screen').html($('#screen').html() + '<br>$ Bye-bye. .');
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Bye-bye.');
                         $('#input').html('');
                     }  else {
-                        $('#screen').html($('#screen').html() + '<br>$ Please stop opening the door.');
+                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ It\'s a pull door.');
                         $('#input').html('');
                     }
                     storeOpen = false;
+                } else {
+                    reset(code);   
                 }
             } else {
-                
+                reset(code);
             }
         }
     }
 });
+
+function reset(code){
+    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Hm, I think we messed up.');
+    $('#input').html('');
+}
 
 
 function addCookie(name){
@@ -59,7 +66,7 @@ function addCookie(name){
 
 function getParts(code){
     var command = code.substring(0, code.indexOf(' '));
-    var modifier = code.substring(code.indexOf('-') + 1, code.lastIndexOf(' '));
+    var modifier = code.substring(code.indexOf('-') + 1, Math.max(code.lastIndexOf(' '), code.length));
     if(code.indexOf(' ', code.indexOf('-')) !== -1){
         var argument = code.substring(code.lastIndexOf(' ') + 1);
         return [command.toLowerCase(), modifier.toLowerCase(), argument.toLowerCase()];
