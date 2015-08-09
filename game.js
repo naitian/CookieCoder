@@ -20,26 +20,35 @@ $(document).keydown(function(ev){
                     $('#input').html('');
                 }
             } else if(parts[0] === 'store'){
-                if(parts[1] === 'open'){
-                    if(!storeOpen){
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Store is open. Welcome to Mick and Border.');
-                        $('#input').html('');
-                    }  else {
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Please stop opening the door.');
-                        $('#input').html('');
-                    }
-                    storeOpen = true;
-                } else if(parts[1] === 'close'){
-                    if(storeOpen){
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Bye-bye.');
-                        $('#input').html('');
-                    }  else {
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ It\'s a pull door.');
-                        $('#input').html('');
-                    }
-                    storeOpen = false;
-                } else {
-                    reset(code);   
+                switch(parts[1]){
+                    case 'open':
+                        if(!storeOpen){
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Store is open. Welcome to Mick and Border.');
+                            $('#input').html('');
+                        }  else {
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Please stop opening the door.');
+                            $('#input').html('');
+                        }
+                        storeOpen = true;
+                        break;
+                    case 'close':
+                        if(storeOpen){
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ Bye-bye.');
+                            $('#input').html('');
+                        }  else {
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br>$ It\'s a pull door.');
+                            $('#input').html('');
+                        }
+                        storeOpen = false;
+                        break;
+                    case 'buy':
+                        switch(parts[2]){
+
+                        }
+                        break;
+                    default:
+                        reset(code);
+                        break;
                 }
             } else {
                 reset(code);
