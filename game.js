@@ -54,6 +54,7 @@ $(document).keydown(function(ev){
         if($('#input').html() !== ''){
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
+            console.log(parts[0]);
             if(parts[0] === 'cookie'){
                 if(parts[1] === 'add'){
                     if(parts[2] !== ''){
@@ -148,7 +149,14 @@ $(document).keydown(function(ev){
                         reset(code);
                         break;
                 }
-            } else {
+            } else if(parts[0] === 'help') {
+    			$('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
+    													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
+    													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
+    													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
+    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close');
+    			$('#input').html('');
+        	} else {
                 reset(code);
             }
         }
@@ -162,7 +170,7 @@ $(document).keydown(function(ev){
 function printStoreItems(){
     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html());
     for(var cnt = 0; cnt < names.length; cnt++){
-        $('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">' + names[cnt] + '</span><br> - ' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
+        $('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">' + names[cnt] + '</span><br>&nbsp;&nbsp;' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
     }
 }
 
