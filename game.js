@@ -40,6 +40,11 @@ var description = ['What more could you ask for?',
 				   'Gee, talk about <i>hyper</i>text markup language',
 				   '"It\'s stupidity. It\'s worse than stupidity: it\'s cookie clicker without any clicking."',
 				   'Hell yeah'];
+var errors = ["You dun messed up A-aron.",
+              "Your syntax is like Avatar: The Last Airbender Movie. You thought it would work.",
+              "Your syntax is like this project. We thought it would work, too.",
+              "You need help. No actually, help.",
+              "You just healthcare.gov'd."]
 var CPS = 0;
 
 
@@ -143,7 +148,7 @@ function printStoreItems(){
 }
 
 function reset(code){
-    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You dun messed up A-aron.');
+    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + errors[Math.floor(Math.random() * errors.length)]);
     $('#input').html('');
 }
 
@@ -186,7 +191,13 @@ function addCPS(add){
     
 
 function getParts(code){
-    var command = code.substring(0, code.indexOf(' '));
+    var command = '';
+    if(code.indexOf(' ') != -1){
+        command = code.substring(0, code.indexOf(' '));
+    } else {
+        command = code;
+        return [command.toLowerCase().trim(), '', ''];
+    }
     var modifier = '';
     if(code.indexOf(' ') === code.lastIndexOf(' ')){
         modifier = code.substring(code.indexOf('-') + 1, code.length);
