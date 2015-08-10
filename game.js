@@ -43,10 +43,25 @@ var description = ['What more could you ask for?',
 var errors = ["error: You dun messed up A-aron.",
               "error: Your syntax is like Avatar: The Last Airbender Movie. You thought it would work.",
               "error: Your syntax is like this project. We thought it would work, too.",
-              "error: You need help. No actually, help.",
+              "error: You need help. No actually, 'help'.",
               "error: You just healthcare.gov'd.",
-              "error: \"No Child Behind\" A+ for effort.",
-              "error: ...About as good as my German accent.",             
+              "error: \"No Child Left Behind\" A+ for effort.",
+              "error: ...About as good as my German accent.",
+              "error: What's missing from 'Like I food'? That's right. Syntax.",
+              "error: If there was a sin tax for your missing syntax, I'd be as rich as Donald Trump thinks he is.",
+              "error: Did it hurt when you fell from heaven...hit your keyboard, and clicked enter?",
+              "error: Up syntax is messed your.",
+              "error: Retry. Your cat stepped on your keyboard.",
+              "error: Did you mean: überprüfen Sie die Schreibweise?",
+              "error: That was special.",
+              "error: ...sigh...",
+              "error: I appreciate your creativity, but not really. Type 'help' if you need help.",
+              "error: Lo siento, solamente hablo Inglés y Español. No entiendo Griego.",
+              "error: Are you from Tennessee? 'cause you have ten phalanges I see. So, use them correctly.",
+              "error: Just type 'clear' and no one will ever know you typed that.",
+              "error: I thought I was going to make it through today. Maybe, tomorrow.",
+              "error: I thought Rick Perry was bad with words...",
+              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection."
              ]
 var CPS = 0;
 var historyCode = ['']
@@ -163,13 +178,16 @@ $(document).keydown(function(ev){
     													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
     													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
     													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
-    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits');
+    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits' +
+    													'<br><span style="color: #349ADB">reset:</span><br>&nbsp;&nbsp;reset -actually you should contemplate resetting everything');
     			$('#input').html('');
         	} else if(parts[0] === 'clear') {
         		$('#input').html('');
     			$('#screen').html('');
         	} else if(parts[0] === 'credits') { 
-    			$('#screen').html($('#screen').html() + '<br>$ credits<br>Programmers: Naitian Zhou and David Zhao<br>Event: Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
+
+    			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br><span style="color: #349ADB">Naitian Zhou</span> and <span style="color: #349ADB">David Zhao</span><br>Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
+
                 if(JSON.parse(localStorage.getItem('credits'))){
                     $('#screen').html($('#screen').html() + '<br><br>Ok, it was nice the first time.');
                 } else {
@@ -178,6 +196,17 @@ $(document).keydown(function(ev){
                     addCookies(50000);        
                 }
         		$('#input').html('');
+            } else if(parts[0] === 'reset') {
+                if(parts[1] === 'actually'){
+                    if(parts[2] === 'you should contemplate resetting everything'){
+                        localStorage.setItem('cookies', JSON.stringify(0));
+                        localStorage.setItem('variableNames', JSON.stringify([]));
+                        localStorage.setItem('cps', JSON.stringify(0));
+                        CPS = JSON.parse(localStorage.getItem('cps'));      
+                        $('#screen').html('Welp, it was your choice. Or maybe it was your friend\'s choice. Either way, everything\'s gone.'); 
+                        $('#input').html(''); 
+                    }
+                }
             } else {
                 reset(code);
             }
@@ -298,7 +327,7 @@ $(document).ready(function(){
         localStorage.setItem('credits', JSON.stringify(false));   
     }
     CPS = JSON.parse(localStorage.getItem('cps'));
-    setInterval(function() {
+    CPSInterval = setInterval(function() {
         addCookies(CPS);
     }, 3000);
 });
