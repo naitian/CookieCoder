@@ -178,7 +178,8 @@ $(document).keydown(function(ev){
     													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
     													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
     													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
-    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits');
+    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits' +
+    													'<br><span style="color: #349ADB">reset:</span><br>&nbsp;&nbsp;reset -actually you should contemplate resetting everything');
     			$('#input').html('');
         	} else if(parts[0] === 'clear') {
         		$('#input').html('');
@@ -193,6 +194,17 @@ $(document).keydown(function(ev){
                     addCookies(50000);        
                 }
         		$('#input').html('');
+            } else if(parts[0] === 'reset') {
+                if(parts[1] === 'actually'){
+                    if(parts[2] === 'you should contemplate resetting everything'){
+                        localStorage.setItem('cookies', JSON.stringify(0));
+                        localStorage.setItem('variableNames', JSON.stringify([]));
+                        localStorage.setItem('cps', JSON.stringify(0));
+                        CPS = JSON.parse(localStorage.getItem('cps'));      
+                        $('#screen').html('Welp, it was your choice. Or maybe it was your friend\'s choice. Either way, everything\'s gone.'); 
+                        $('#input').html(''); 
+                    }
+                }
             } else {
                 reset(code);
             }
@@ -313,7 +325,7 @@ $(document).ready(function(){
         localStorage.setItem('credits', JSON.stringify(false));   
     }
     CPS = JSON.parse(localStorage.getItem('cps'));
-    setInterval(function() {
+    CPSInterval = setInterval(function() {
         addCookies(CPS);
     }, 3000);
 });
