@@ -169,7 +169,7 @@ $(document).keydown(function(ev){
         		$('#input').html('');
     			$('#screen').html('');
         	} else if(parts[0] === 'credits') { 
-    			$('#screen').html($('#screen').html() + '<br>$ Programmers: Naitian Zhou and David Zhao<br>Event: Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
+    			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Programmers: Naitian Zhou and David Zhao<br>Event: Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
                 if(JSON.parse(localStorage.getItem('credits'))){
                     $('#screen').html($('#screen').html() + '<br><br>Ok, it was nice the first time.');
                 } else {
