@@ -162,12 +162,23 @@ $(document).keydown(function(ev){
     													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
     													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
     													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
-    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close');
+    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
+    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits');
     			$('#input').html('');
         	} else if(parts[0] === 'clear') {
         		$('#input').html('');
     			$('#screen').html('');
-        	} else {
+        	} else if(parts[0] === 'credits') { 
+    			$('#screen').html($('#screen').html() + '<br>$ Programmers: Naitian Zhou and David Zhao<br>Event: Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
+                if(JSON.parse(localStorage.getItem('credits'))){
+                    $('#screen').html($('#screen').html() + '<br><br>Ok, it was nice the first time.');
+                } else {
+                    $('#screen').html($('#screen').html() + '<br><br>BY THE WAY, here\'s 50000 cookies for being awesome'); 
+                    localStorage.setItem('credits', JSON.stringify(true));  
+                    addCookies(50000);        
+                }
+        		$('#input').html('');
+            } else {
                 reset(code);
             }
         }
@@ -282,6 +293,9 @@ $(document).ready(function(){
     }
     if(!localStorage.getItem('variableNames')){
         localStorage.setItem('variableNames',JSON.stringify([]));   
+    }
+    if(!localStorage.getItem('credits')){
+        localStorage.setItem('credits', JSON.stringify(false));   
     }
     CPS = JSON.parse(localStorage.getItem('cps'));
     setInterval(function() {
