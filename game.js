@@ -55,8 +55,9 @@ var ptInHistory = 0;
 $(document).keydown(function(ev){
     if(ev.keyCode == 13){
         if($('#input').html() !== ''){
+            historyCode[0] = $('#input').html();
             historyCode.reverse();
-            historyCode.push($('#input').html());
+            historyCode.push('');
             historyCode.reverse();
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
@@ -170,20 +171,28 @@ $(document).keydown(function(ev){
                 reset(code);
             }
         }
-    } else if(ev.keyCode == 38){
-        $('#input').html(historyCode[ptInHistory]);
+        ptInHistory = 0;
+    } else if(ev.keyCode == 38){ //up arrow
+        if(ptInHistory === 0){
+            historyCode[0] = $('#input').html();
+        }
         ptInHistory += 1;
         if(ptInHistory == historyCode.length){
-            ptInHistory = historyCode.length - 1;   
+            ptInHistory = historyCode.length - 1;
+        } else {
+            ev.preventDefault();
         }
-    } else if(ev.keyCode == 40){ //up arrow
         $('#input').html(historyCode[ptInHistory]);
+    } else if(ev.keyCode == 40){ //down arrow
+        console.log('down');
         ptInHistory -= 1;
         if(ptInHistory < 0){
-            ptInHistory = 0;   
+            ptInHistory = 0;
+        } else {
+            ev.preventDefault();
         }
-    } else {
-        historyCode[historyCode.length - 1] = $('#input').html();
+        $('#input').html(historyCode[ptInHistory]);
+        console.log(ptInHistory)
     }
 });
 
