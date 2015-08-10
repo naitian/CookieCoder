@@ -66,7 +66,7 @@ $(document).keydown(function(ev){
                     if(parts[2] !== ''){
                         if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
                             addCookie(parts[2]);
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
+                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
 
                             $('#input').html('');
                         } else {
@@ -80,7 +80,7 @@ $(document).keydown(function(ev){
                         $('#input').html('');
                     }
                 } else if(parts[1] === 'view'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.round(JSON.parse(localStorage.getItem('cookies'))));
+                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
                     
                     $('#input').html('');
                 } else if(parts[1] === 'cps'){
