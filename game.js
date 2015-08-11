@@ -190,6 +190,7 @@ $(document).keydown(function(ev){
             	case 'clear':
 	            	$('#input').html('');
 	    			$('#screen').html('');
+					break;
     			case 'credits':
 					$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br><span style="color: #349ADB">Naitian Zhou</span> and <span style="color: #349ADB">David Zhao</span><br>Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
 
@@ -200,7 +201,8 @@ $(document).keydown(function(ev){
 	                    localStorage.setItem('credits', JSON.stringify(true));  
 	                    addCookies(50000);        
 	                }
-					$('#input').html('');	
+					$('#input').html('');
+					break;
 				case 'reset':
 					if(parts[1] === 'actually'){
 	                    if(parts[2] === 'you should contemplate resetting everything'){
@@ -212,6 +214,7 @@ $(document).keydown(function(ev){
 	                        $('#input').html(''); 
 	                    }
 	                }
+					break;
                 default:
                 	reset(code);
                 	break;
