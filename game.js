@@ -61,7 +61,8 @@ var errors = ["error: You dun messed up A-aron.",
               "error: Just type 'clear' and no one will ever know you typed that.",
               "error: I thought I was going to make it through today. Maybe, tomorrow.",
               "error: I thought Rick Perry was bad with words...",
-              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection."
+              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection.",
+              "error: There's no such thing as Yoda Speak in programming... so quit trying."
              ]
 var CPS = 0;
 var historyCode = ['']
