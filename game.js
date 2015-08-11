@@ -77,138 +77,144 @@ $(document).keydown(function(ev){
             code = $('#input').html();
             var parts = getParts(code); //parts is like command -modifier arguments
             console.log(parts[0]);
-            if(parts[0] === 'cookie'){
-                if(parts[1] === 'add'){
-                    if(parts[2] !== ''){
-                        if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
-                            addCookie(parts[2]);
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
+            switch(parts[0]){
+        		case 'cookie':
+        			switch(parts[1]){
+        				case 'add':
+	        				if(parts[2] !== ''){
+		                        if($.inArray(parts[2], JSON.parse(localStorage.getItem('variableNames'))) === -1){
+		                            addCookie(parts[2]);
+		                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
 
-                            $('#input').html('');
-                        } else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Sorry, bud, no two cookies can be alike.');
+		                            $('#input').html('');
+		                        } else {
+		                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Sorry, bud, no two cookies can be alike.');
 
-                            $('#input').html('');
-                        }
-                    } else {
-                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Add nothing, huh? You REALLY want to break this huh. >:(');
-                        
-                        $('#input').html('');
+		                            $('#input').html('');
+		                        }
+		                    } else {
+		                        $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Add nothing, huh? You REALLY want to break this huh. >:(');
+		                        
+		                        $('#input').html('');
+		                    }
+		                    break;
+	                    case 'view':
+	                    	$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
+	                    	$('#input').html('');
+	                    	break;
+                    	case 'cps':
+                    		$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cps'));
+		                    $('#input').html('');
+		                    break;
+	                    default:
+	                    	$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> My cookie does not understand.');
+	                    	$('#input').html('');
+	                    	break;
+
+        			}
+	        		break;
+        		case 'store':
+	        		switch(parts[1]){ //switch case for modifier
+	                    case 'open':
+	                        if(!storeOpen){
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Store is open. Welcome to Mick and Border.');
+
+	                            $('#input').html('');
+	                        }  else {
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Please stop opening the door.');
+
+	                            $('#input').html('');
+	                        }
+	                        printStoreItems();
+	                        storeOpen = true;
+	                        break;
+	                    case 'close':
+	                        if(storeOpen){
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Bye-bye.');
+
+	                            $('#input').html('');
+	                        }  else {
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> It\'s a pull door.');
+
+	                            $('#input').html('');
+	                        }
+	                        storeOpen = false;
+	                        break;
+	                    case 'buy':
+	                        if(storeOpen){
+	                            var c = getCookies();
+	                            var buy = false;
+	                            for(var i = 0; i < names.length; i++){
+	                            	if(names[i].toLowerCase() == parts[2]){
+	                        			buy = true;
+	                            		if(prices[i] <= c){
+	                            			subtractCookie(prices[i]);
+	                            			addCPS(cps[i])
+	                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + names[i] + ' has been purchased.');
+	                        				 
+	                                        $('#input').html('');
+	                            		}
+	                            		else {
+	                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You don\'t have enough cookies. Sorry, bruh!');
+	                            			
+	                                        $('#input').html('');
+	                            		}
+	                            	}
+	                            }
+	                            if(!buy){
+		                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Out of stock.');
+		                    
+	                                $('#input').html('');
+	                            }
+	                        } else {
+	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You have to go into the store first.');
+
+	                            $('#input').html('');
+	                        }
+	                        break;
+	                    default:
+	                        reset(code);
+	                        break;	 
                     }
-                } else if(parts[1] === 'view'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + Math.floor(JSON.parse(localStorage.getItem('cookies'))));
-                    
-                    $('#input').html('');
-                } else if(parts[1] === 'cps'){
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + localStorage.getItem('cps'));
-                    
-                    $('#input').html('');
-                } else {
-                    $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> My cookie does not understand.');
-                    
-                    $('#input').html('');
-                }
-            } else if(parts[0] === 'store'){
-                switch(parts[1]){ //switch case for modifier
-                    case 'open':
-                        if(!storeOpen){
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Store is open. Welcome to Mick and Border.');
+    				break;
+				case 'help':
+	            	$('#input').html('');
+	    			$('#screen').html($('#screen').html() + '<br>$ help<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
+	    													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
+	    													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
+	    													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
+	    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
+	    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits' +
+	    													'<br><span style="color: #349ADB">reset:</span><br>&nbsp;&nbsp;reset -actually you should contemplate resetting everything');
+            		break;
+            	case 'clear':
+	            	$('#input').html('');
+	    			$('#screen').html('');
+    			case 'credits':
+					$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br><span style="color: #349ADB">Naitian Zhou</span> and <span style="color: #349ADB">David Zhao</span><br>Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
 
-                            $('#input').html('');
-                        }  else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Please stop opening the door.');
-
-                            $('#input').html('');
-                        }
-                        printStoreItems();
-                        storeOpen = true;
-                        break;
-                    case 'close':
-                        if(storeOpen){
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Bye-bye.');
-
-                            $('#input').html('');
-                        }  else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> It\'s a pull door.');
-
-                            $('#input').html('');
-                        }
-                        storeOpen = false;
-                        break;
-                    case 'buy':
-                        if(storeOpen){
-                            var c = getCookies();
-                            var buy = false;
-                            for(var i = 0; i < names.length; i++){
-                            	if(names[i].toLowerCase() == parts[2]){
-                        			buy = true;
-                            		if(prices[i] <= c){
-                            			subtractCookie(prices[i]);
-                            			addCPS(cps[i])
-                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> ' + names[i] + ' has been purchased.');
-                        				 
-                                        $('#input').html('');
-                            		}
-                            		else {
-                            			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You don\'t have enough cookies. Sorry, bruh!');
-                            			
-                                        $('#input').html('');
-                            		}
-                            	}
-                            }
-                            if(!buy){
-	                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> Out of stock.');
-	                    
-                                $('#input').html('');
-                            }
-                        } else {
-                            $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br> You have to go into the store first.');
-
-                            $('#input').html('');
-                        }
-                        break;
-                    default:
-                        reset(code);
-                        break;
-                }
-            } else if(parts[0] === 'help') {
-            	$('#input').html('');
-    			$('#screen').html($('#screen').html() + '<br>$ help<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
-    													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
-    													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
-    													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
-    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
-    													'<br><span style="color: #349ADB">learn who made this game:</span><br>&nbsp;&nbsp;credits' +
-    													'<br><span style="color: #349ADB">reset:</span><br>&nbsp;&nbsp;reset -actually you should contemplate resetting everything');
-    			$('#input').html('');
-        	} else if(parts[0] === 'clear') {
-        		$('#input').html('');
-    			$('#screen').html('');
-        	} else if(parts[0] === 'credits') { 
-
-    			$('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html() + '<br><span style="color: #349ADB">Naitian Zhou</span> and <span style="color: #349ADB">David Zhao</span><br>Pilot DC 2015<br>Special thanks to Microsoft, Stack Overflow, and the small child who ran around a lot<br>Making it look awesome credits to Naitian Zhou');
-
-                if(JSON.parse(localStorage.getItem('credits'))){
-                    $('#screen').html($('#screen').html() + '<br><br>Ok, it was nice the first time.');
-                } else {
-                    $('#screen').html($('#screen').html() + '<br><br>BY THE WAY, here\'s 50000 cookies for being awesome'); 
-                    localStorage.setItem('credits', JSON.stringify(true));  
-                    addCookies(50000);        
-                }
-        		$('#input').html('');
-            } else if(parts[0] === 'reset') {
-                if(parts[1] === 'actually'){
-                    if(parts[2] === 'you should contemplate resetting everything'){
-                        localStorage.setItem('cookies', JSON.stringify(0));
-                        localStorage.setItem('variableNames', JSON.stringify([]));
-                        localStorage.setItem('cps', JSON.stringify(0));
-                        CPS = JSON.parse(localStorage.getItem('cps'));      
-                        $('#screen').html('Welp, it was your choice. Or maybe it was your friend\'s choice. Either way, everything\'s gone.'); 
-                        $('#input').html(''); 
-                    }
-                }
-            } else {
-                reset(code);
+	                if(JSON.parse(localStorage.getItem('credits'))){
+	                    $('#screen').html($('#screen').html() + '<br><br>Ok, it was nice the first time.');
+	                } else {
+	                    $('#screen').html($('#screen').html() + '<br><br>BY THE WAY, here\'s 50000 cookies for being awesome'); 
+	                    localStorage.setItem('credits', JSON.stringify(true));  
+	                    addCookies(50000);        
+	                }
+					$('#input').html('');	
+				case 'reset':
+					if(parts[1] === 'actually'){
+	                    if(parts[2] === 'you should contemplate resetting everything'){
+	                        localStorage.setItem('cookies', JSON.stringify(0));
+	                        localStorage.setItem('variableNames', JSON.stringify([]));
+	                        localStorage.setItem('cps', JSON.stringify(0));
+	                        CPS = JSON.parse(localStorage.getItem('cps'));      
+	                        $('#screen').html('Welp, it was your choice. Or maybe it was your friend\'s choice. Either way, everything\'s gone.'); 
+	                        $('#input').html(''); 
+	                    }
+	                }
+                default:
+                	reset(code);
+                	break;
             }
         }
         ptInHistory = 0;
