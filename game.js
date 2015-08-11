@@ -244,8 +244,13 @@ $(document).keydown(function(ev){
 
 function printStoreItems(){
     $('#screen').html($('#screen').html() + '<br>$ ' + $('#input').html());
+	var tmp = getCookies();
     for(var cnt = 0; cnt < names.length; cnt++){
-        $('#screen').html($('#screen').html() + '<br><span style="color: #349ADB">' + names[cnt] + '</span><br>&nbsp;&nbsp;' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
+		var color = '#349ADB';
+		if(tmp < prices[cnt]){
+			color = '#17496d';	
+		}
+        $('#screen').html($('#screen').html() + '<br><span style="color: ' + color + '">' + names[cnt] + '</span><br>&nbsp;&nbsp;' + prices[cnt] + ' cookies | ' + cps[cnt] + ' cps | ' + description[cnt]);
     }
 }
 
