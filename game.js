@@ -63,8 +63,7 @@ var errors = ["error: You dun messed up A-aron.",
               "error: I thought Rick Perry was bad with words...",
               "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection.",
               "error: There's no such thing as Yoda Speak in programming... so quit trying.",
-              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection. \n
-              		...and by we I mean you and by connection I mean brains. I said maybe."
+              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection. <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...and by we I mean you and by connection I mean brains. I said maybe."
              ]
 var CPS = 0;
 var historyCode = ['']
