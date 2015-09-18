@@ -62,7 +62,9 @@ var errors = ["error: You dun messed up A-aron.",
               "error: I thought I was going to make it through today. Maybe, tomorrow.",
               "error: I thought Rick Perry was bad with words...",
               "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection.",
-              "error: There's no such thing as Yoda Speak in programming... so quit trying."
+              "error: There's no such thing as Yoda Speak in programming... so quit trying.",
+              "error: Maybe I'll be nice for a change. I really appreciate you checking me out and all, but I just don't think we have a connection. \n
+              		...and by we I mean you and by connection I mean brains. I said maybe."
              ]
 var CPS = 0;
 var historyCode = ['']
@@ -182,6 +184,7 @@ $(document).keydown(function(ev){
 	            	$('#input').html('');
 	    			$('#screen').html($('#screen').html() + '<br>$ help<br><span style="color: #349ADB">checkout how many cookies you have:</span><br>&nbsp;&nbsp;cookie -view' +
 	    													'<br><span style="color: #349ADB">add more cookies:</span><br>&nbsp;&nbsp;cookie -add [name]' + 
+	    													'<br><span style="color: #349ADB">view cookies per second:</span><br>&nbsp;&nbsp;cookie -cps' +
 	    													'<br><span style="color: #349ADB">open up the store:</span><br>&nbsp;&nbsp;store -open' + 
 	    													'<br><span style="color: #349ADB">go shopping:</span><br>&nbsp;&nbsp;store -buy [itemname]' + 
 	    													'<br><span style="color: #349ADB">close up shop:</span><br>&nbsp;&nbsp;store -close' +
